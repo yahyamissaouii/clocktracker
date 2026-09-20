@@ -27,21 +27,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Employees must enter a task title and notes/details when clocking in. They can finish tasks from the dashboard; recorded task minutes appear in weekly and monthly timesheets. Editing a task while it is being tracked creates an admin approval request. Admins can inspect session notes and task details per employee entry, review all approval types from `/admin/approvals`, and see live team hours and open tasks in `/admin/team`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Free deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project is configured for Cloudflare Workers through OpenNext. The GitHub workflow in `.github/workflows/deploy-cloudflare.yml` deploys every push to `main` on Cloudflare's free Workers plan.
 
-## Learn More
+Add these GitHub Actions secrets before the first deployment:
 
-To learn more about Next.js, take a look at the following resources:
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `DATABASE_URL`
+- `DIRECT_URL`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Cloudflare API token needs Workers deployment permission. GitHub Pages is not used because this app requires server-side authentication, admin actions, and database access.
